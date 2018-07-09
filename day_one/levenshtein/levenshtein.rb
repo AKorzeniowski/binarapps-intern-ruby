@@ -1,17 +1,29 @@
+require 'Matrix'
+
 def levenshtein(first_word, second_word)
   if first_word == second_word
-    distance = 0
+    return 0
   else 
-    lengths = [first_word.size, second_word.size]
-    if lengths.min == 0
-      distance = lengths.max
-    else
-      distance = [levenshtein(first_word.size - 1, second_word.size) + 1,
-                  levenshtein(first_word.size, second_word.size - 1) + 1,
-                  levenshtein(first_word.size - 1, second_word.size - 1) + first_word.size == second_word.size ? 0 : 1]  
+    distances = Matrix.zero(first_word.size, second_word.size)
+
+    for row in 0...first_word.size
+      distances[row, 0] = row
     end
+
+    for col in 0...second_word.size
+      distances[0, col] = col
+    end
+
+    for row in 0...first_word.size
+      for col in 0...second_word.size
+        distances[row, col] = [ distances[row - 1, col] + 1,
+                              distances[row - 1, col] + 1,
+                              distances[row - 1, col] + 1].min
+      end
+    end
+
+    return distances
   end
-  return distance
 end
 
 puts levenshtein('cat', 'hat')
