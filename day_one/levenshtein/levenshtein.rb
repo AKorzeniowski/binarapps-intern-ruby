@@ -1,13 +1,13 @@
-first_word = 'cat'
-second_word = 'hat'
-
-if first_word == second_word
-  distance = 0
-else 
-  if [first_word.size, second_word.size].min == 0
-    distance = [first_word.size, second_word.size].max
-  else
-    
+def levenshtein(first_word, second_word)
+  if first_word == second_word
+    distance = 0
+  else 
+    if [first_word.size, second_word.size].min == 0
+      distance = [first_word.size, second_word.size].max
+    else
+      distance = 1        
+  end
+  return distance
 end
 
-puts distance
+levenshtein('cat', 'hat')
