@@ -38,5 +38,3 @@ def levenshtein(first_word, second_word)
     return distances[first_word.size, second_word.size]
   end
 end
-
-puts levenshtein(ARGV[0], ARGV[1])
